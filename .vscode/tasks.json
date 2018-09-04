@@ -1,0 +1,75 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Python - run current file",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${file}"
+            ],
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+            "group": "build"
+        },
+        {
+            "label": "Scrapy - run current file",
+            "type": "shell",
+            "command": "scrapy",
+            "args": [
+                "runspider",
+                "${file}",
+                "-o",
+                "result.json"
+            ],
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+            "group": "build"
+        },
+        {
+            "label": "Scrapy - run MainPageSpider",
+            "type": "shell",
+            "command": "scrapy",
+            "args": [
+                "crawl",
+                "mainPage"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Scrapy - run GenreOrImagePageSpider",
+            "type": "shell",
+            "command": "scrapy",
+            "args": [
+                "crawl",
+                "genreOrImagePages"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Scrapy - run MusicDescriptionPageSpider",
+            "type": "shell",
+            "command": "scrapy",
+            "args": [
+                "crawl",
+                "musicDescriptionPages"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Python - run current project",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}"
+            ],
+            "group": "build"
+        }
+    ]
+}

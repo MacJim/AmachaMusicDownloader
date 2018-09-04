@@ -1,0 +1,19 @@
+{
+    "cSpell.words": [
+        "amacha",
+        "chdir",
+        "fileno",
+        "getch",
+        "getcwd",
+        "isdigit",
+        "isdir",
+        "isfile",
+        "msvcrt",
+        "scrapy",
+        "sqlite",
+        "tcgetattr",
+        "tcsetattr",
+        "termios",
+        "xpath"
+    ]
+}
