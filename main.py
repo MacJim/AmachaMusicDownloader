@@ -267,6 +267,9 @@ def enterAppraiseMusicMenu():
                 musicFileName = musicIDOrFileName
                 musicInformation = DatabaseManager.getInstance().searchForMusicWithFileName(musicFileName)
 
+        else:    # Invalid input handling.
+            continue
+
         if (musicInformation is None):
             print("Music not found!")
         else:
@@ -277,15 +280,15 @@ def enterAppraiseMusicMenu():
             if (userInput != "4"):
                 openMusicFileNamed(musicFileName)
 
-        printMusicInformation(musicInformation)
+            printMusicInformation(musicInformation)
 
-        newLoveLevel = input("New love level (0 ~ 4, 0 = hate, 4 = love): ")
-        newComments = input("Comments: ")
+            newLoveLevel = input("New love level (0 ~ 4, 0 = hate, 4 = love): ")
+            newComments = input("Comments: ")
 
-        if (newLoveLevel != ""):
-            DatabaseManager.getInstance().updateMusicLoveLevel(musicInformation["musicID"], newLoveLevel)
-        if (newComments != ""):
-            DatabaseManager.getInstance().updateMusicComments(musicInformation["musicID"], newComments)
+            if (newLoveLevel != ""):
+                DatabaseManager.getInstance().updateMusicLoveLevel(musicInformation["musicID"], newLoveLevel)
+            if (newComments != ""):
+                DatabaseManager.getInstance().updateMusicComments(musicInformation["musicID"], newComments)
 
         AmachaMusicDownloader.helpers.getch.pressAnyKeyToContinue()
 
