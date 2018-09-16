@@ -224,8 +224,8 @@ def enterAppraiseMusicMenu():
         clearTerminal()
 
         print("Appraise music in local database.")
-        print("1. Appraise a random piece of music.")
-        print("2. Appraise a random piece of music from a specific genre and / or image.")
+        print("1. Appraise a random piece of unassessed music.")
+        print("2. Appraise a random piece of unassessed music from a specific genre and / or image.")
         print("3. Appraise a specific piece of music.")
         print("4. Update music love level, comments and suitability manually.")
         print("0. Return to main menu.")
