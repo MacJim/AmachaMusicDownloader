@@ -168,8 +168,9 @@ def enterFindMusicMenu():
 
         print("Find music in local database.")
         print("1. Find music by internal ID.")
-        print("2. Find music by name.")
-        print("3. Find music by genre and / or image.")
+        print("2. Find music by Japanese name.")
+        print("3. Find music by file name.")
+        print("4. Find music by genre and / or image.")
         print("0. Return to main menu.")
 
         userInput = AmachaMusicDownloader.helpers.getch.getch()
@@ -189,7 +190,17 @@ def enterFindMusicMenu():
                 printMusicInformation(musicInformation)
 
         elif (userInput == "2"):
-            # Find music by name.
+            # Find music by Japanese name.
+            japaneseName = input("Music Japanese name: ")
+            musicInformation = DatabaseManager.getInstance().searchForMusicWithJapaneseName(japaneseName)
+
+            if (musicInformation is None):
+                print("Music not found!")
+            else:
+                printMusicInformation(musicInformation)
+
+        elif (userInput == "3"):
+            # Find music by file name.
             fileName = input("Music file name: ")
             musicInformation = DatabaseManager.getInstance().searchForMusicWithFileName(fileName)
 
@@ -198,7 +209,7 @@ def enterFindMusicMenu():
             else:
                 printMusicInformation(musicInformation)
 
-        elif (userInput == "3"):
+        elif (userInput == "4"):
             # Find music by genre and / or image.
             printALineOfSeparator()
             printAllGenresInformation()

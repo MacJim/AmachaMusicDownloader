@@ -145,6 +145,10 @@ class DatabaseManager:
         self.databaseCursor.execute("SELECT * FROM " + DatabaseManager.musicTableName + " WHERE descriptionPageURL=?", (url,))
         return self.databaseCursor.fetchone()    # Returns only the first result since URLs are unique.
 
+    def searchForMusicWithJapaneseName(self, japaneseName):
+        self.databaseCursor.execute("SELECT * FROM " + DatabaseManager.musicTableName + " WHERE japaneseName=?", (japaneseName,))
+        return self.databaseCursor.fetchone()
+
     def searchForMusicWithFileName(self, fileName):
         """File names are stored in the database as part of the download URL.
 
