@@ -1,4 +1,5 @@
 import os
+# from shutil import get_terminal_size
 
 from twisted.internet import reactor, defer
 from scrapy.crawler import CrawlerRunner
@@ -66,6 +67,8 @@ def printAllImagesInformation():
         print(anImage["imageID"], ". ", anImage["japaneseName"], " ", anImage["englishName"])
 
 def printMusicInformation(musicInformation):
+    """Prints a single piece of music's **full** information.
+    """
     print("Music ID:", musicInformation["musicID"])
     print("Japanese name:", musicInformation["japaneseName"])
     print("English name:", musicInformation["englishName"])
@@ -130,6 +133,23 @@ def printMusicInformation(musicInformation):
     #                 print(", ", end = "")
     #             print(suitabilityTexts[i], end = "")
 
+def printAnArrayOfMusicInformation(musicInformationArray):
+    musicCount = len(musicInformationArray)
+    if (musicCount <= 0):
+        return    # Print nothing.
+    
+    print(musicCount, "pieces of music in total.")
+
+    for musicInformation in musicInformationArray:
+        printALineOfSeparator()
+        printMusicInformation(musicInformation)
+
+    printALineOfSeparator()
+    
+    # TODO: Sort music by love level.
+    # print("Sorting form love to hate:")
+    # TODO: Use pydoc.pager
+
 def openMusicFileNamed(fileName):
     if (fileName[-4:] != ".mp3"):
             fileName += ".mp3"
@@ -171,6 +191,7 @@ def enterFindMusicMenu():
         print("2. Find music by Japanese name.")
         print("3. Find music by file name.")
         print("4. Find music by genre and / or image.")
+        print("5. Find music by description.")
         print("0. Return to main menu.")
 
         userInput = AmachaMusicDownloader.helpers.getch.getch()
@@ -224,9 +245,22 @@ def enterFindMusicMenu():
 
             musicFound = DatabaseManager.getInstance().searchForMusicWithGenreIDAndImageID(genreID, imageID)
 
-            for musicInformation in musicFound:
-                printMusicInformation(musicInformation)
-                printALineOfSeparator()
+            if (len(musicFound) == 0):
+                print("No music found!")
+            else:
+                printAnArrayOfMusicInformation(musicFound)
+
+        elif (userInput == "5"):
+            commentsSnippet = input("Comments snippet: ")
+
+            printALineOfSeparator()
+
+            musicFound = DatabaseManager.getInstance().searchForMusicWithCommentsSnippet(commentsSnippet)
+
+            if (len(musicFound) == 0):
+                print("No music found!")
+            else:
+                printAnArrayOfMusicInformation(musicFound)
 
         AmachaMusicDownloader.helpers.getch.pressAnyKeyToContinue()
 

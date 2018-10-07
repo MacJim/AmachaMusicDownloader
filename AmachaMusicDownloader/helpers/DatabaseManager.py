@@ -174,6 +174,13 @@ class DatabaseManager:
 
         return self.databaseCursor.fetchall()
 
+    def searchForMusicWithCommentsSnippet(self, commentsSnippet):
+        if (commentsSnippet is None):
+            return []
+
+        self.databaseCursor.execute("SELECT * FROM " + DatabaseManager.musicTableName + " WHERE comments LIKE '%" + commentsSnippet + "%'")
+        return self.databaseCursor.fetchall()
+
     def getRandomUnassessedMusic(self, genreID, imageID):
         """Get a random piece of unassessed music.
 
