@@ -289,6 +289,38 @@ class DatabaseManager:
     def extractMusicFileNameFromDownloadURL(self, url):
         return url.split("/")[-1]
 
+    def getMusicStatistics(self):
+        self.databaseCursor.execute("SELECT count(*) FROM " + DatabaseManager.musicTableName)
+        totalMusicCount = self.databaseCursor.fetchone()[0]
+
+        self.databaseCursor.execute("SELECT count(*) FROM " + DatabaseManager.musicTableName + " WHERE loveLevel IS NOT NULL")
+        assessedMusicCount = self.databaseCursor.fetchone()[0]
+
+        self.databaseCursor.execute("SELECT count(*) FROM " + DatabaseManager.musicTableName + " WHERE loveLevel=4")
+        loveLevel4MusicCount = self.databaseCursor.fetchone()[0]
+
+        self.databaseCursor.execute("SELECT count(*) FROM " + DatabaseManager.musicTableName + " WHERE loveLevel=3")
+        loveLevel3MusicCount = self.databaseCursor.fetchone()[0]
+
+        self.databaseCursor.execute("SELECT count(*) FROM " + DatabaseManager.musicTableName + " WHERE loveLevel=2")
+        loveLevel2MusicCount = self.databaseCursor.fetchone()[0]
+
+        self.databaseCursor.execute("SELECT count(*) FROM " + DatabaseManager.musicTableName + " WHERE loveLevel=1")
+        loveLevel1MusicCount = self.databaseCursor.fetchone()[0]
+
+        self.databaseCursor.execute("SELECT count(*) FROM " + DatabaseManager.musicTableName + " WHERE loveLevel=0")
+        loveLevel0MusicCount = self.databaseCursor.fetchone()[0]
+
+        return {
+            "totalMusicCount": totalMusicCount,
+            "assessedMusicCount": assessedMusicCount,
+            "loveLevel4MusicCount": loveLevel4MusicCount,
+            "loveLevel3MusicCount": loveLevel3MusicCount,
+            "loveLevel2MusicCount": loveLevel2MusicCount,
+            "loveLevel1MusicCount": loveLevel1MusicCount,
+            "loveLevel0MusicCount": loveLevel0MusicCount
+        }
+
 
 
 # MARK: For testing only.

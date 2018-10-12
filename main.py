@@ -337,6 +337,19 @@ def enterAppraiseMusicMenu():
 
         AmachaMusicDownloader.helpers.getch.pressAnyKeyToContinue()
 
+def enterStatisticsMenu():
+    statistics = DatabaseManager.getInstance().getMusicStatistics()
+
+    print("Total music count:", statistics["totalMusicCount"])
+    print("Assessed music count:", statistics["assessedMusicCount"])
+    print("Loved music count:", statistics["loveLevel4MusicCount"])
+    print("Liked music count:", statistics["loveLevel3MusicCount"])
+    print("Mediocre music count:", statistics["loveLevel2MusicCount"])
+    print("Disliked music count:", statistics["loveLevel1MusicCount"])
+    print("Hated music count:", statistics["loveLevel0MusicCount"])
+
+    AmachaMusicDownloader.helpers.getch.pressAnyKeyToContinue()
+
 
 # MARK: Main program.
 # 1. Switch to project directory.
@@ -367,6 +380,7 @@ while True:
     print("1. Scrape and / or download music from the Amacha website.")
     print("2. Find music in local database.")
     print("3. Appraise music in local database.")
+    print("4. Statistics.")
     print("0. Exit.")
 
     # NO confirmation here. No need to press ENTER 😝.
@@ -383,3 +397,6 @@ while True:
 
     elif (userInput == "3"):
         enterAppraiseMusicMenu()
+
+    elif (userInput == "4"):
+        enterStatisticsMenu()
