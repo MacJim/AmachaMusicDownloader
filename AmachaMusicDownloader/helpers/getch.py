@@ -8,7 +8,7 @@ def getch():
     try:
         # Only works on Windows.
         import msvcrt
-        return msvcrt.getch()
+        return msvcrt.getch().decode("ASCII")
 
     except ModuleNotFoundError:
         # Works on UNIX.
